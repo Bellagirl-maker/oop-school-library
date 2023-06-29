@@ -16,5 +16,3 @@ class Book
     @all_books
   end
 end
-
-

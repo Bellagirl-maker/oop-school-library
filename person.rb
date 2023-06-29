@@ -26,5 +26,3 @@ class Person < Nameable
     attr_reader :all
   end
 end
-
-
