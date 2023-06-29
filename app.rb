@@ -39,8 +39,6 @@ def select_option(option)
   end
 end
 
-# Define the books variable and populate it with book objects
-
 # Method to list all books
 def list_all_books
   puts 'Listing all books:'

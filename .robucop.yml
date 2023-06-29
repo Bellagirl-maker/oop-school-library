@@ -6,6 +6,9 @@ AllCops:
     - "node_modules/**/*"
 
   DisplayCopNames: true
+  Metrics/CyclomaticComplexity:
+  Enabled: false
+
 
 Layout/LineLength:
   Max: 120

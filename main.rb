@@ -13,4 +13,3 @@ def main
   puts 'Exiting the application. Goodbye!'
 end
 main
-
