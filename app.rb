@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'classroom'
 require_relative 'person'
 require_relative 'book'
@@ -50,14 +48,6 @@ def list_all_books
     puts "Title: #{book.title}, Author: #{book.author}"
   end
 end
-
-# Method to list all books
-# def list_all_books
-#   puts 'Listing all books:'
-#   Book.all.each do |book|
-#     puts "Title: #{book.title}, Author: #{book.author}"
-#   end
-# end
 
 # Method to list all people
 def list_all_people

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'date'
 # Represents a rental with attributes such as date, book, and person.
 class Rental

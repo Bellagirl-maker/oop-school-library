@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Testing the classes
 require_relative 'classroom'
 require_relative 'person'
