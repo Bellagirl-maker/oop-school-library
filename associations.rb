@@ -1,8 +1,13 @@
 # Testing the classes
 require_relative 'classroom'
+require_relative 'person'
+require_relative 'student'
+require_relative 'book'
+require_relative 'rental'
+
 classroom = Classroom.new('Math Class')
-student1 = Student.new('John')
-student2 = Student.new('Alice')
+student1 = Student.new(14, classroom: classroom, parent_permission: true, name: 'John')
+student2 = Student.new(15, classroom: classroom, parent_permission: true, name: 'Alice')
 classroom.add_student(student1)
 classroom.add_student(student2)
 
