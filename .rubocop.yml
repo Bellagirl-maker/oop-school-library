@@ -30,6 +30,8 @@ Style/AndOr:
   Enabled: false
 Style/DefWithParentheses:
   Enabled: false
+Style/ClassVars:
+  Enabled: false
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
 

@@ -43,14 +43,14 @@ class App
       puts "Enter the person's classroom:"
       classroom = gets.chomp
 
-      person = Student.new(age, classroom: classroom, name: name)
+      person = Student.new(name, age, classroom)
       people << person
       puts "Student '#{person.name}' created!"
     when 't'
       puts "Enter the person's specialization:"
       specialization = gets.chomp
 
-      person = Teacher.new(age, specialization, name)
+      person = Teacher.new(name, age, specialization)
       people << person
       puts "Teacher '#{person.name}' created!"
     else
@@ -117,6 +117,14 @@ class App
     end
   end
 
+  def find_person_by_id(id)
+    people.find { |person| person.id == id }
+  end
+
+  def find_book_by_id(id)
+    books.find { |book| book.id == id }
+  end
+
   # rubocop:disable Metrics/CyclomaticComplexity
   def main
     loop do
@@ -157,3 +165,6 @@ class App
   end
 end
 # rubocop:enable Metrics/CyclomaticComplexity
+
+app = App.new
+app.main
