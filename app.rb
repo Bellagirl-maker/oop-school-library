@@ -1,170 +1,126 @@
-require_relative 'book'
-require_relative 'person'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'book'
 require_relative 'rental'
 
 class App
-  attr_reader :books, :people, :rentals
-
   def initialize
     @books = []
     @people = []
     @rentals = []
   end
 
+  def options
+    puts "\n\nPlease choose an option by entering a number:"
+
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
+
+    gets.chomp.to_i
+  end
+
   def list_books
-    puts 'List of Books:'
-    books.each do |book|
-      puts "#{book.title} by #{book.author}"
-    end
+    @books.each { |book| puts "Title: \"#{book.title}\", Author: #{book.author}" }
   end
 
   def list_people
-    puts 'List of People:'
-    people.each do |person|
-      puts "#{person.name} (#{person.class})"
-    end
+    @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
   end
 
   def create_person
-    puts 'Create a Person'
-    puts 'Enter name:'
-    name = gets.chomp
+    print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
+    option = gets.chomp.to_i
 
-    puts 'Enter age:'
-    age = gets.chomp.to_i
-
-    puts 'Is the person a student or a teacher? (s/t)'
-    person_type = gets.chomp.downcase
-
-    case person_type
-    when 's'
-      puts "Enter the person's classroom:"
-      classroom = gets.chomp
-
-      person = Student.new(name, age, classroom)
-      people << person
-      puts "Student '#{person.name}' created!"
-    when 't'
-      puts "Enter the person's specialization:"
-      specialization = gets.chomp
-
-      person = Teacher.new(name, age, specialization)
-      people << person
-      puts "Teacher '#{person.name}' created!"
-    else
-      puts 'Invalid person type.'
+    case option
+    when 1
+      create_student
+    when 2
+      create_teacher
     end
+  end
+
+  def create_student
+    print 'Student age: '
+    age = gets.chomp
+    print 'Student name: '
+    name = gets.chomp
+    print 'Has parent permission? [Y/N]: '
+    permission = gets.chomp.upcase
+    case permission
+    when 'Y'
+      student = Student.new(nil, age, name, parent_permission: true)
+      @people << student
+    when 'N'
+      student = Student.new(nil, age, name, parent_permission: false)
+      @people << student
+    else
+      puts 'Invalid input!'
+    end
+    puts 'Person Created Successfully!'
+  end
+
+  def create_teacher
+    print 'Teacher age: '
+    age = gets.chomp
+    print 'Teacher name: '
+    name = gets.chomp
+    print 'Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(specialization, age, name, parent_permission: true)
+    @people << teacher
+    puts 'Teacher created successfully!'
   end
 
   def create_book
-    puts 'Create a Book'
-    puts "Enter the book's title:"
+    print 'Book Title: '
     title = gets.chomp
 
-    puts "Enter the book's author:"
+    print 'Book Author: '
     author = gets.chomp
 
     book = Book.new(title, author)
-    books << book
-    puts "Book '#{book.title}' created!"
+    @books << book
+
+    puts 'Book created successfully'
   end
 
   def create_rental
-    puts 'Create a Rental'
-    puts "Enter the person's ID:"
-    person_id = gets.chomp.to_i
+    return if @books.empty? || @people.empty?
 
-    person = find_person_by_id(person_id)
-    if person.nil?
-      puts "Person with ID #{person_id} not found."
-      return
+    puts 'Select a book from the following list of number'
+    @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+    book = gets.chomp.to_i
+
+    puts 'Select a person from the following list of number (not ID)'
+    @people.each_with_index do |person, index|
+      puts "#{index}) Name: #{person.name} Age: #{person.age} Id: #{person.id}"
     end
+    person = gets.chomp.to_i
 
-    puts "Enter the book's ID:"
-    book_id = gets.chomp.to_i
+    print 'Date: '
+    date = gets.chomp
 
-    book = find_book_by_id(book_id)
-    if book.nil?
-      puts "Book with ID #{book_id} not found."
-      return
-    end
+    rental = Rental.new(date, @people[person], @books[book])
+    @rentals << rental
 
-    puts 'Enter the rental date (YYYY-MM-DD):'
-    rental_date = gets.chomp
-
-    rental = Rental.new(Date.parse(rental_date), book, person)
-    rentals << rental
-    puts "Rental created for '#{person.name}' - '#{book.title}'"
+    puts 'Rental created successfully'
   end
 
-  def list_rentals_for_person
-    puts "Enter the person's ID:"
-    person_id = gets.chomp.to_i
-
-    person = find_person_by_id(person_id)
-    if person.nil?
-      puts "Person with ID #{person_id} not found."
-      return
-    end
-
-    rentals_for_person = rentals.select { |rental| rental.person == person }
-
-    puts "Rentals for '#{person.name}':"
-    rentals_for_person.each do |rental|
-      puts "#{rental.book.title} - #{rental.date}"
+  def list_rentals
+    print 'Person ID: '
+    id = gets.chomp.to_i
+    @rentals.each do |rent|
+      puts "Date: #{rent.date}, Book: \"#{rent.book.title}\" by #{rent.book.author}" if rent.person.id == id
     end
   end
 
-  def find_person_by_id(id)
-    people.find { |person| person.id == id }
-  end
-
-  def find_book_by_id(id)
-    books.find { |book| book.id == id }
-  end
-
-  # rubocop:disable Metrics/CyclomaticComplexity
-  def main
-    loop do
-      puts 'Welcome to the Library App!'
-      puts 'Please select an option:'
-      puts '1. List all books'
-      puts '2. List all people'
-      puts '3. Create a person'
-      puts '4. Create a book'
-      puts '5. Create a rental'
-      puts '6. List rentals for a person'
-      puts '7. Quit'
-
-      option = gets.chomp.to_i
-
-      case option
-      when 1
-        list_books
-      when 2
-        list_people
-      when 3
-        create_person
-      when 4
-        create_book
-      when 5
-        create_rental
-      when 6
-        list_rentals_for_person
-      when 7
-        puts 'Thank you for using the Library App. Goodbye!'
-        break
-      else
-        puts 'Invalid option. Please try again.'
-      end
-
-      puts "\n"
-    end
+  def quit
+    puts 'Thank you for using this app!'
+    exit
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
-
-app = App.new
-app.main
