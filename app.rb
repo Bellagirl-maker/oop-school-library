@@ -1,8 +1,10 @@
 require_relative 'library'
+require_relative 'create_a_book'
 
 class App
   def initialize
     @library = Library.new
+    @create_a_book = CreateABook.new(@library)
   end
 
   def options
@@ -31,7 +33,7 @@ class App
   end
 
   def create_book
-    @library.create_book
+    @create_a_book.create_book
   end
 
   def create_rental
