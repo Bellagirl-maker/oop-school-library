@@ -95,9 +95,8 @@ Clone this repository to your desired folder:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Decorate a class**
-- [ ] **Setup Associations**
-- [ ] **Create a basic UI**
+- [ ] **Preserving data**
+- [ ] **Unit Tests**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
