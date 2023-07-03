@@ -184,7 +184,3 @@ class Library
     end
   end
 end
-
-
-
-
