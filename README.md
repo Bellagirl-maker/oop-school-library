@@ -86,13 +86,17 @@ Clone this repository to your desired folder:
 - Twitter: [@twitterhandle](https://twitter.com/isabella_otoo)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/isabella-otoo)
 
+👤 **Oumaima Nejjari**
+
+- GitHub: [@aima98](https://github.com/aima98)
+- LinkedIn: [Oumaima Nejjari](https://www.linkedin.com/in/oumaimanejjari)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **Decorate a class**
-- [ ] **Setup Associations**
-- [ ] **Create a basic UI**
+- [ ] **Preserving data**
+- [ ] **Unit Tests**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
