@@ -1,7 +1,6 @@
 require_relative 'library'
 require_relative 'create_a_book'
 
-
 class App
   def initialize
     @library = Library.new
