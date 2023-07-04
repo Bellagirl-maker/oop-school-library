@@ -5,7 +5,7 @@ require_relative 'teacher'
 require_relative 'rental'
 
 class Library
-  attr_reader :books, :people, :rentals
+  attr_reader :people, :books, :rentals
 
   def initialize
     @books = []

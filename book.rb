@@ -1,18 +1,20 @@
-# Represents a book with attributes such as title, author, and rentals.
 class Book
-  attr_accessor :title, :author
-  attr_reader :rentals
+  attr_accessor :title, :author, :rentals
 
-  @all_books = []
-
-  def initialize(title, author)
+  def initialize(title = 'unknown', author = 'unknown')
     @title = title
     @author = author
     @rentals = []
-    self.class.all << self
   end
 
-  def self.all
-    @all_books
+  def add_rental(person, date)
+    Rental.new(date, self, person)
+  end
+
+  def as_json()
+    {
+      title: @title,
+      author: @author
+    }
   end
 end

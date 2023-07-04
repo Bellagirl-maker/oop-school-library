@@ -1,10 +1,10 @@
-require_relative 'app'
+require_relative 'menu'
 
 def main
   puts "\nWelcome to the Library App!\n"
 
-  app = App.new
-  app.main
+  menu = Menu.new
+  menu.display_list_of_options
 end
 
 main
