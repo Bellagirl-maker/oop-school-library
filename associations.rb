@@ -10,7 +10,7 @@ student2 = Student.new(15, classroom: classroom, parent_permission: true, name: 
 classroom.add_student(student1)
 classroom.add_student(student2)
 
-book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
+book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald', 'The Housekeeper')
 person = Person.new('John Doe')
 
 rental = Rental.new(Date.today, book, person)
