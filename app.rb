@@ -19,7 +19,7 @@ class App
   # list all books
   def list_of_books
     if @books.empty?
-      puts 'No books available'
+      puts 'No Books available'
     else
       @books.each_with_index do |book, i|
         puts "#{i + 1} title: #{book.title} author: #{book.author}"
